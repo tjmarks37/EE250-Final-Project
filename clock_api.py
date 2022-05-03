@@ -25,7 +25,7 @@ def clock_init():
        
         
         
-        print(time)
+        
         return time
 
     else:
