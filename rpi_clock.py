@@ -6,8 +6,8 @@ import sys
 
 sys.path.append('../../Software/Python/')
 
-#import grovepi
-#from grovepi import *
+import grovepi
+from grovepi import *
 
 import clock_api
 
