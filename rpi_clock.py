@@ -15,7 +15,7 @@ alarm_time="off"
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
-    #subscribe to topics of interest here
+    #subscribe to topics of interest hegit addre
     client.subscribe("tom_rohan/alarm")
     client.message_callback_add("tom_rohan/alarm", alarm)
     client.subscribe("tom_rohan/button")
@@ -51,6 +51,7 @@ def alarm(client, userdata, message):
     global alarm_time
     alarm_time=str(message.payload, "utf-8")
     
+    
     #if str(message.payload, "utf-8")==current_time:  
      #   print("Alarm going off")       
           
@@ -70,8 +71,9 @@ if __name__ == '__main__':
         
         client.publish("tom_rohan/time", current_time)
         if alarm_time==current_time:  
-            print("Alarm going off")
-        
+           print("Alarm going off")
+           client.publish("tom_rohan/alarm_status","Alarm going off")
+               
         time.sleep(1)
 
        

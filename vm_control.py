@@ -4,12 +4,14 @@ from pynput import keyboard
 import sys
 sys.path.append('../../Software/Python/')
 
+import push_api
+
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
     #subscribe to topics of interest here
-    #client.subscribe("tom_rohan/alarm")
-    #client.message_callback_add("tom_rohan/alarm", alarm)
+    client.subscribe("tom_rohan/alarm_status")
+    client.message_callback_add("tom_rohan/alarm_status", alarm_status)
     client.subscribe("tom_rohan/button")
     client.message_callback_add("tom_rohan/button",button)
     #client.subscribe("tom_rohan/time")
@@ -48,6 +50,12 @@ def on_press(key):
         client.publish("tom_rohan/alarm", alarm_time)
     elif k == 'down':
         client.publish("tom_rohan/alarm", "off")
+        
+def alarm_status(client, userdata, message):
+    print("Alarm Status: " + str(message.payload, "utf-8"))
+    if str(message.payload, "utf-8")=="Alarm going off":
+        push_api.PUSH_APP['init']()
+    
         
 if __name__ == '__main__':
     #setup the keyboard event listener
