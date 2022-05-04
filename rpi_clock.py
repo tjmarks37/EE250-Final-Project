@@ -85,7 +85,7 @@ if __name__ == '__main__':
         current_time=str(time_list['hour'])+":"+str(time_list['minute'])
         client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
         client.publish("tom_rohan/time", current_time)
-        if (alarm_time==current_time)&&(str(grovepi.digitalRead(BTTN))=="0"):  
+        if alarm_time==current_time:  
            print("Alarm going off")
            client.publish("tom_rohan/alarm_status","Alarm going off")
            if str(grovepi.digitalRead(BTTN))=="1":
