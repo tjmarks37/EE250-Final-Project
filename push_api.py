@@ -51,7 +51,7 @@ def stop_init():
 
 PUSH_APP = {
     'name': 'PUSH',
-    'init': push_init
+    'init': push_init,
     'stop': stop_init
 }
 

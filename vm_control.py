@@ -57,6 +57,7 @@ def alarm_status(client, userdata, message):
         push_api.PUSH_APP['init']()
     if str(message.payload, "utf-8")=="Alarm turned off":
         push_api.PUSH_APP['stop']()
+        client.publish("tom_rohan/alarm", "off")
         
 if __name__ == '__main__':
     #setup the keyboard event listener
