@@ -90,7 +90,7 @@ if __name__ == '__main__':
            client.publish("tom_rohan/alarm_status","Alarm going off")
            if str(grovepi.digitalRead(BTTN))=="1":
               client.publish("tom_rohan/alarm_status","Alarm turned off")
-        else
+        else:
            client.publish("tom_rohan/alarm_status","Alarm not set")
            
         	
