@@ -11,6 +11,21 @@ from grovepi import *
 
 import clock_api
 
+BTTN=3
+grovepi.pinMode(BTTN,"INPUT")
+
+if sys.platform == 'uwp':
+    import winrt_smbus as smbus
+    bus = smbus.SMBus(1)
+else:
+    import smbus
+    import RPi.GPIO as GPIO
+    rev = GPIO.RPI_REVISION
+    if rev == 2 or rev == 3:
+        bus = smbus.SMBus(1)
+    else:
+        bus = smbus.SMBus(0)
+
 alarm_time="off"
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
@@ -73,6 +88,8 @@ if __name__ == '__main__':
         if alarm_time==current_time:  
            print("Alarm going off")
            client.publish("tom_rohan/alarm_status","Alarm going off")
+           
+        client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
                
         time.sleep(1)
 
