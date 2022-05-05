@@ -31,7 +31,7 @@ flag=0
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
-    #subscribe to topics of interest hegit addre
+    
     client.subscribe("tom_rohan/alarm")
     client.message_callback_add("tom_rohan/alarm", alarm)
     client.subscribe("tom_rohan/button")
@@ -46,8 +46,7 @@ def button(client, userdata, message):
     
     if str(message.payload, "utf-8") == "1":
         print("Alarm off!")
-        print("custom_callback: " + message.topic + " " + "\"" + 
-            str(message.payload, "utf-8") + "\"")
+        
        
             
 def print_time(client, userdata, message): 

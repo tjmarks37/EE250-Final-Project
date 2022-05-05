@@ -6,7 +6,9 @@ sys.path.append('../../Software/Python/')
 
 import push_api
 import coin_api
-
+alarm_stat="Alarm not set"
+alarm_time='off'
+flag=1
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
@@ -22,10 +24,12 @@ def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
     
 def button(client, userdata, message):
-    
+    global alarm_time
     if str(message.payload, "utf-8") == "1":
         bitval=coin_api.COIN_APP['init']()
         push_api.PUSH_APP['coin'](bitval)
+        alarm_time='off'
+        client.publish("tom_rohan/alarm", "off")
        
             
 def print_time(client, userdata, message): 
@@ -44,12 +48,25 @@ def on_press(key):
         client.publish("tom_rohan/alarm", "off")
         
 def alarm_status(client, userdata, message):
-    print("Alarm Status: " + str(message.payload, "utf-8"))
-    if str(message.payload, "utf-8")=="Alarm going off":
+    global alarm_stat
+    global flag
+    
+    alarm_stat_new=str(message.payload, "utf-8")
+    if alarm_stat_new != alarm_stat:
+        alarm_stat=str(message.payload, "utf-8")
+        flag=1
+        
+    if str(message.payload, "utf-8")=="Alarm not set" and flag==1:
+        print("Alarm Status: " + str(message.payload, "utf-8"))
+        flag=0
+    if str(message.payload, "utf-8")=="Alarm going off" and flag==1:
         push_api.PUSH_APP['init']()
-    if str(message.payload, "utf-8")=="Alarm turned off":
+        print("Alarm Status: " + str(message.payload, "utf-8"))
+        flag=0
+    if str(message.payload, "utf-8")=="Alarm turned off" and flag==1:
         push_api.PUSH_APP['stop']()
         client.publish("tom_rohan/alarm", "off")
+        flag=0
         
 if __name__ == '__main__':
     #setup the keyboard event listener
