@@ -5,6 +5,7 @@ import sys
 sys.path.append('../../Software/Python/')
 
 import push_api
+import coin_api
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
@@ -23,22 +24,13 @@ def on_message(client, userdata, msg):
 def button(client, userdata, message):
     
     if str(message.payload, "utf-8") == "1":
-        print("Alarm off!")
-        print("custom_callback: " + message.topic + " " + "\"" + 
-            str(message.payload, "utf-8") + "\"")
+        bitval=coin_api.COIN_APP['init']()
+        push_api.PUSH_APP['coin'](bitval)
        
-
-    elif str(message.payload, "utf-8") == "0":
-        print("Alarm on!")
-        print("custom_callback: " + message.topic + " " + "\"" + 
-            str(message.payload, "utf-8") + "\"")
             
 def print_time(client, userdata, message): 
     print("Current Time (HR:MIN): " + str(message.payload, "utf-8"))
-    #print("custom_callback: " + message.topic + " " + "\"" + 
-        #str(message.payload, "utf-8") + "\"")
-    #print("custom_callback: message.payload is of type " + 
-          #str(type(message.payload)))
+    
           
 def on_press(key):
     try: 

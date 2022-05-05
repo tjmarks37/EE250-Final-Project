@@ -27,6 +27,7 @@ else:
         bus = smbus.SMBus(0)
 
 alarm_time="off"
+flag=0
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
@@ -48,18 +49,10 @@ def button(client, userdata, message):
         print("custom_callback: " + message.topic + " " + "\"" + 
             str(message.payload, "utf-8") + "\"")
        
-
-    elif str(message.payload, "utf-8") == "0":
-        print("Alarm on!")
-        print("custom_callback: " + message.topic + " " + "\"" + 
-            str(message.payload, "utf-8") + "\"")
             
 def print_time(client, userdata, message): 
     print("Current Time (HR:MIN): " + str(message.payload, "utf-8"))
-    #print("custom_callback: " + message.topic + " " + "\"" + 
-        #str(message.payload, "utf-8") + "\"")
-    #print("custom_callback: message.payload is of type " + 
-          #str(type(message.payload)))
+    
 
 def alarm(client, userdata, message):
     print("Alarm time: " + str(message.payload, "utf-8"))
@@ -85,7 +78,7 @@ if __name__ == '__main__':
         current_time=str(time_list['hour'])+":"+str(time_list['minute'])
         client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
         client.publish("tom_rohan/time", current_time)
-        flag=0
+        
         if alarm_time==current_time or flag==1:  
            print("Alarm going off")
            client.publish("tom_rohan/alarm_status","Alarm going off")

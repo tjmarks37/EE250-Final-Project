@@ -47,12 +47,34 @@ def stop_init():
     json = urlopen(request).read().decode()
     print(json)
     
+def send_coin_init(bitval):
+    
+
+    url = 'https://www.pushsafer.com/api'
+    post_fields = {
+	"t" : 'Bitcoin Current Value',
+	"m" : bitval,
+	"s" : 11,
+	"v" : 3,
+	"i" : 33,
+	"c" : '#FF0000',
+	"d" : 'a',
+	"u" : 'https://www.pushsafer.com',
+	"ut" : 'Open Pushsafer',
+	"k" : '0S3YoMceEKWtCnneL9qM',
+	}
+
+    request = Request(url, urlencode(post_fields).encode())
+    json = urlopen(request).read().decode()
+    print(json)
+    
 
 
 PUSH_APP = {
     'name': 'PUSH',
     'init': push_init,
-    'stop': stop_init
+    'stop': stop_init,
+    'coin': send_coin_init
 }
 
 
