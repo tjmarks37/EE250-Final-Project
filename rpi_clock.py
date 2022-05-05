@@ -84,9 +84,13 @@ if __name__ == '__main__':
            print("Alarm going off")
            client.publish("tom_rohan/alarm_status","Alarm going off")
            flag=1
-        if flag==1:
+        elif flag==1:
            print("Alarm going off")
            client.publish("tom_rohan/alarm_status","Alarm going off")
+           if flag==0:
+              print("Alarm off!")
+              client.publish("tom_rohan/alarm_status","Alarm turned off")
+           
         
         else:
            client.publish("tom_rohan/alarm_status","Alarm not set")
