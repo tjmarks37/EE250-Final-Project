@@ -46,6 +46,8 @@ def button(client, userdata, message):
     
     if str(message.payload, "utf-8") == "1":
         print("Alarm off!")
+        client.publish("tom_rohan/alarm_status","Alarm turned off")
+        flag=0
         
        
             
@@ -82,9 +84,7 @@ if __name__ == '__main__':
            print("Alarm going off")
            client.publish("tom_rohan/alarm_status","Alarm going off")
            flag=1
-        if str(grovepi.digitalRead(BTTN))=="1":
-           client.publish("tom_rohan/alarm_status","Alarm turned off")
-           flag=0
+        
         else:
            client.publish("tom_rohan/alarm_status","Alarm not set")
            
