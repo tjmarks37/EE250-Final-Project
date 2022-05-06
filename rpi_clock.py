@@ -80,13 +80,13 @@ if __name__ == '__main__':
         client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
         client.publish("tom_rohan/time", current_time)
         
-        if alarm_time==current_time and flag==0:  
+        if alarm_time==current_time:  
            print("Alarm going off")
            client.publish("tom_rohan/alarm_status","Alarm going off")
            flag=1
            alarm_time='off'
            client.publish("tom_rohan/alarm", "off")
-        if flag==1:
+        elif flag==1:
            print("Alarm going off")
            client.publish("tom_rohan/alarm_status","Alarm going off")
            if grovepi.digitalRead(BTTN)=="1":
