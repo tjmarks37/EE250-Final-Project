@@ -41,13 +41,13 @@ def on_press(key):
         k = key.char # single-char keys
     except: 
         k = key.name # other keys
-    flag=1
-    if k =='up' and flag==1:
+    fg=1
+    if k =='up' and fg==1:
         client.publish("tom_rohan/alarm", alarm_time)
-        flag=0
-    elif k == 'down'and flag==0:
+        fg=0
+    elif k == 'down'and fg==0:
         client.publish("tom_rohan/alarm", "off")
-        flag=1
+        fg=1
         
 def alarm_status(client, userdata, message):
     global alarm_stat
@@ -68,7 +68,7 @@ def alarm_status(client, userdata, message):
     if str(message.payload, "utf-8")=="Alarm turned off" and flag==1:
         push_api.PUSH_APP['stop']()
         print("Alarm Status: " + str(message.payload, "utf-8"))
-        client.publish("tom_rohan/alarm", "off")
+        #client.publish("tom_rohan/alarm", "off")
         flag=0
         
 if __name__ == '__main__':

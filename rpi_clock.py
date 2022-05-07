@@ -41,11 +41,11 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
     
-def button(client, userdata, message):
-    global flag
-    if str(message.payload, "utf-8") == "1":
-        client.publish("tom_rohan/alarm_status","Alarm turned off")
-        flag=0
+#def button(client, userdata, message):
+  #  global flag
+  #  if str(message.payload, "utf-8") == "1":
+    #    client.publish("tom_rohan/alarm_status","Alarm turned off")
+     #   flag=0
         
        
             
@@ -55,14 +55,14 @@ def print_time(client, userdata, message):
 
 def alarm(client, userdata, message):
     global alarm_time
-    flag=0
+    fg=0
     alarm_stat_new=str(message.payload, "utf-8")
     if alarm_stat_new != alarm_time:
         alarm_time=str(message.payload, "utf-8")
-        flag=1
-    if flag==1:
+        fg=1
+    if fg==1:
         print("Alarm time: " + str(message.payload, "utf-8"))
-        flag=0
+        fg=0
     
     
     #if str(message.payload, "utf-8")==current_time:  
@@ -98,8 +98,8 @@ if __name__ == '__main__':
         if grovepi.digitalRead(BTTN)=="1" and flag==1:
               print("Alarm off!")
               client.publish("tom_rohan/alarm_status","Alarm turned off")
-              alarm_time='off'
-              client.publish("tom_rohan/alarm", "off")
+              #alarm_time='off'
+              #client.publish("tom_rohan/alarm", "off")
               flag=0
            
         
