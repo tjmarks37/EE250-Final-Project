@@ -47,7 +47,7 @@ def button(client, userdata, message):
      if str(message.payload, "utf-8") == "1":
         client.publish("tom_rohan/alarm_status","Alarm turned off")
         flag=0
-     print(str(message.payload, "utf-8"))
+     
         
        
             
@@ -89,17 +89,17 @@ if __name__ == '__main__':
         client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
         client.publish("tom_rohan/time", current_time)
         
-        #if alarm_time==current_time:  
-           #print("Alarm going off")
-           #client.publish("tom_rohan/alarm_status","Alarm going off")
-           #flag=1
-           #alarm_time='off'
-           #client.publish("tom_rohan/alarm", "off")
-        #elif flag==1:
-           #print("Alarm going off")
-           #client.publish("tom_rohan/alarm_status","Alarm going off")
+        if alarm_time==current_time:  
+           print("Alarm going off")
+           client.publish("tom_rohan/alarm_status","Alarm going off")
+           flag=1
+           alarm_time='off'
+           client.publish("tom_rohan/alarm", "off")
+        elif flag==1:
+           print("Alarm going off")
+           client.publish("tom_rohan/alarm_status","Alarm going off")
         
-        if grovepi.digitalRead(BTTN)=="1" :
+        if grovepi.digitalRead(BTTN)=="1":
            print("Alarm off!")
            client.publish("tom_rohan/alarm_status","Alarm turned off")
            alarm_time="off"
