@@ -28,6 +28,7 @@ else:
 
 alarm_time="off"
 flag=0
+fg=0
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
@@ -55,7 +56,8 @@ def print_time(client, userdata, message):
 
 def alarm(client, userdata, message):
     global alarm_time
-    fg=0
+    global fg
+    
     alarm_stat_new=str(message.payload, "utf-8")
     if alarm_stat_new != alarm_time:
         alarm_time=str(message.payload, "utf-8")

@@ -7,8 +7,10 @@ sys.path.append('../../Software/Python/')
 import push_api
 import coin_api
 alarm_stat="Alarm not set"
-alarm_time='off'
+alarm_time="off"
+old_press="0"
 flag=1
+fg1=0
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
@@ -25,11 +27,18 @@ def on_message(client, userdata, msg):
     
 def button(client, userdata, message):
     global alarm_time
-    if str(message.payload, "utf-8") == "1":
+    global old_press
+    new_press=str(message.payload, "utf-8")
+    global fg1
+    if old_press!=new_press
+        old_press=(message.payload, "utf-8")
+        fg1=1
+    if str(message.payload, "utf-8") == "1"and fg1=1:
         bitval=coin_api.COIN_APP['init']()
         push_api.PUSH_APP['coin'](bitval)
-        alarm_time='off'
+        alarm_time="off"
         client.publish("tom_rohan/alarm", "off")
+        fg1=0
        
             
 def print_time(client, userdata, message): 
