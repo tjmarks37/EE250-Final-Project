@@ -36,8 +36,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("tom_rohan/alarm", alarm)
     client.subscribe("tom_rohan/button")
     client.message_callback_add("tom_rohan/button",button)
-    #client.subscribe("tom_rohan/time")
-    #client.message_callback_add("tom_rohan/time", print_time)
+    
 
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
@@ -85,7 +84,7 @@ if __name__ == '__main__':
         if alarm_time==current_time:  
            print("Alarm going off")
            client.publish("tom_rohan/alarm_status","Alarm going off")
-           #flag=1
+           flag=1
            #alarm_time='off'
            #client.publish("tom_rohan/alarm", "off")
         #elif flag==1:
@@ -99,7 +98,7 @@ if __name__ == '__main__':
               #flag=0
            
         
-        else:
+        elif flag=0:
            client.publish("tom_rohan/alarm_status","Alarm not set")
            #flag=0
         	
