@@ -98,7 +98,7 @@ if __name__ == '__main__':
               #flag=0
            
         
-        elif flag=0:
+        elif flag==0:
            client.publish("tom_rohan/alarm_status","Alarm not set")
            #flag=0
         	
