@@ -64,7 +64,7 @@ def alarm_status(client, userdata, message):
     global alarm_stat
     global flag
     global alarm_time
-    
+    global fg1
     alarm_stat_new=str(message.payload, "utf-8")
     if alarm_stat_new != alarm_stat:
         alarm_stat=str(message.payload, "utf-8")
@@ -73,7 +73,7 @@ def alarm_status(client, userdata, message):
     if str(message.payload, "utf-8")=="Alarm not set" and flag==1:
         print("Alarm Status: " + str(message.payload, "utf-8"))
         flag=0
-    if str(message.payload, "utf-8")=="Alarm going off" and flag==1:
+    if str(message.payload, "utf-8")=="Alarm going off" and flag==1 and fg1==0:
         push_api.PUSH_APP['init']()
         print("Alarm Status: " + str(message.payload, "utf-8"))
         flag=0
