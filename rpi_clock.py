@@ -91,24 +91,25 @@ if __name__ == '__main__':
         if alarm_time==current_time:  
            print("Alarm going off")
            client.publish("tom_rohan/alarm_status","Alarm going off")
-           
+           flag=1
            #alarm_time='off'
            #client.publish("tom_rohan/alarm", "off")
         #elif flag==1:
            #print("Alarm going off")
            #client.publish("tom_rohan/alarm_status","Alarm going off")
-        else:
-           client.publish("tom_rohan/alarm_status","Alarm not set")
-           #flag=0
-        if grovepi.digitalRead(BTTN)=="1":
+        
+        elif grovepi.digitalRead(BTTN)=="1" and flag=1:
            print("Alarm off!")
            client.publish("tom_rohan/alarm_status","Alarm turned off")
            alarm_time="off"
            client.publish("tom_rohan/alarm", "off")
            
            client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
+           flag=0
            
-        
+        elif flag==0:
+           client.publish("tom_rohan/alarm_status","Alarm not set")
+           #flag=0
        
         	
            	
