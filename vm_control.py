@@ -11,6 +11,7 @@ alarm_time="off"
 old_press="0"
 flag=1
 fg1=0
+fg=1
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
@@ -30,10 +31,10 @@ def button(client, userdata, message):
     global old_press
     new_press=str(message.payload, "utf-8")
     global fg1
-    if old_press!=new_press
+    if old_press!=new_press:
         old_press=(message.payload, "utf-8")
         fg1=1
-    if str(message.payload, "utf-8") == "1"and fg1=1:
+    if str(message.payload, "utf-8") == "1"and alarm_time!="off":
         bitval=coin_api.COIN_APP['init']()
         push_api.PUSH_APP['coin'](bitval)
         alarm_time="off"
@@ -50,7 +51,8 @@ def on_press(key):
         k = key.char # single-char keys
     except: 
         k = key.name # other keys
-    fg=1
+        global fg
+    
     if k =='up' and fg==1:
         client.publish("tom_rohan/alarm", alarm_time)
         fg=0
@@ -61,6 +63,7 @@ def on_press(key):
 def alarm_status(client, userdata, message):
     global alarm_stat
     global flag
+    global alarm_time
     
     alarm_stat_new=str(message.payload, "utf-8")
     if alarm_stat_new != alarm_stat:
@@ -74,7 +77,7 @@ def alarm_status(client, userdata, message):
         push_api.PUSH_APP['init']()
         print("Alarm Status: " + str(message.payload, "utf-8"))
         flag=0
-    if str(message.payload, "utf-8")=="Alarm turned off" and flag==1:
+    if str(message.payload, "utf-8")=="Alarm turned off" and flag==1 and:
         push_api.PUSH_APP['stop']()
         print("Alarm Status: " + str(message.payload, "utf-8"))
         #client.publish("tom_rohan/alarm", "off")

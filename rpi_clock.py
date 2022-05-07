@@ -106,7 +106,7 @@ if __name__ == '__main__':
               client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
            
         
-        elif flag==0:
+        if flag==0:
            client.publish("tom_rohan/alarm_status","Alarm not set")
            #flag=0
         	
