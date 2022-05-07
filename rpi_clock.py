@@ -34,8 +34,8 @@ def on_connect(client, userdata, flags, rc):
     
     client.subscribe("tom_rohan/alarm")
     client.message_callback_add("tom_rohan/alarm", alarm)
-    client.subscribe("tom_rohan/button")
-    client.message_callback_add("tom_rohan/button",button)
+    #client.subscribe("tom_rohan/button")
+    #client.message_callback_add("tom_rohan/button",button)
     
 
 def on_message(client, userdata, msg):

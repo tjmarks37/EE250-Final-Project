@@ -41,11 +41,13 @@ def on_press(key):
         k = key.char # single-char keys
     except: 
         k = key.name # other keys
-    
-    if k =='up':
+    flag=1
+    if k =='up' and flag==1:
         client.publish("tom_rohan/alarm", alarm_time)
-    elif k == 'down':
+        flag=0
+    elif k == 'down'and flag==0:
         client.publish("tom_rohan/alarm", "off")
+        flag=1
         
 def alarm_status(client, userdata, message):
     global alarm_stat
