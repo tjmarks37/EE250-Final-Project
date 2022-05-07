@@ -55,6 +55,7 @@ def print_time(client, userdata, message):
 
 def alarm(client, userdata, message):
     global alarm_time
+    flag=0
     alarm_stat_new=str(message.payload, "utf-8")
     if alarm_stat_new != alarm_time:
         alarm_time=str(message.payload, "utf-8")
@@ -94,12 +95,12 @@ if __name__ == '__main__':
         #elif flag==1:
            #print("Alarm going off")
            #client.publish("tom_rohan/alarm_status","Alarm going off")
-           #if grovepi.digitalRead(BTTN)=="1":
-              #print("Alarm off!")
-              #client.publish("tom_rohan/alarm_status","Alarm turned off")
-              #alarm_time='off'
-              #client.publish("tom_rohan/alarm", "off")
-              #flag=0
+        if grovepi.digitalRead(BTTN)=="1":
+              print("Alarm off!")
+              client.publish("tom_rohan/alarm_status","Alarm turned off")
+              alarm_time='off'
+              client.publish("tom_rohan/alarm", "off")
+              flag=0
            
         
         elif flag==0:
