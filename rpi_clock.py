@@ -35,18 +35,18 @@ def on_connect(client, userdata, flags, rc):
     
     client.subscribe("tom_rohan/alarm")
     client.message_callback_add("tom_rohan/alarm", alarm)
-    #client.subscribe("tom_rohan/button")
-    #client.message_callback_add("tom_rohan/button",button)
+    client.subscribe("tom_rohan/button")
+    client.message_callback_add("tom_rohan/button",button)
     
 
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
     
-#def button(client, userdata, message):
-  #  global flag
-  #  if str(message.payload, "utf-8") == "1":
-    #    client.publish("tom_rohan/alarm_status","Alarm turned off")
-     #   flag=0
+def button(client, userdata, message):
+     global flag
+     if str(message.payload, "utf-8") == "1":
+        client.publish("tom_rohan/alarm_status","Alarm turned off")
+        flag=0
         
        
             
@@ -85,7 +85,7 @@ if __name__ == '__main__':
         current_time=str(time_list['hour'])+":"+str(time_list['minute'])
         
         
-        	
+        client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
         client.publish("tom_rohan/time", current_time)
         
         #if alarm_time==current_time:  
@@ -104,7 +104,7 @@ if __name__ == '__main__':
            alarm_time="off"
            client.publish("tom_rohan/alarm", "off")
            
-           client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
+           #client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
            flag=0
            
         elif flag==0:
