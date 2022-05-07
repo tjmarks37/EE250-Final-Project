@@ -83,7 +83,7 @@ if __name__ == '__main__':
     while True:
         time_list=clock_api.CLOCK_APP['init']()
         current_time=str(time_list['hour'])+":"+str(time_list['minute'])
-        global alarm_time
+        
         
         	
         client.publish("tom_rohan/time", current_time)
