@@ -77,7 +77,7 @@ if __name__ == '__main__':
     while True:
         time_list=clock_api.CLOCK_APP['init']()
         current_time=str(time_list['hour'])+":"+str(time_list['minute'])
-        if grovepi.digitalRead(BTTN):
+        if grovepi.digitalRead(BTTN)=="1":
         	client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
         	time.sleep(0.5)
         client.publish("tom_rohan/time", current_time)
