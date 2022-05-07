@@ -42,9 +42,8 @@ def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
     
 def button(client, userdata, message):
-    
+    global flag
     if str(message.payload, "utf-8") == "1":
-        print("Alarm off!")
         client.publish("tom_rohan/alarm_status","Alarm turned off")
         flag=0
         
