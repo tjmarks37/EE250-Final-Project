@@ -82,7 +82,7 @@ if __name__ == '__main__':
         time_list=clock_api.CLOCK_APP['init']()
         current_time=str(time_list['hour'])+":"+str(time_list['minute'])
         
-        client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
+        
         	
         client.publish("tom_rohan/time", current_time)
         
@@ -101,6 +101,7 @@ if __name__ == '__main__':
               #alarm_time='off'
               #client.publish("tom_rohan/alarm", "off")
               flag=0
+              client.publish("tom_rohan/button", grovepi.digitalRead(BTTN))
            
         
         elif flag==0:
