@@ -47,6 +47,7 @@ def button(client, userdata, message):
      if str(message.payload, "utf-8") == "1":
         client.publish("tom_rohan/alarm_status","Alarm turned off")
         flag=0
+     print(str(message.payload, "utf-8"))
         
        
             
