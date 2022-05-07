@@ -54,9 +54,14 @@ def print_time(client, userdata, message):
     
 
 def alarm(client, userdata, message):
-    print("Alarm time: " + str(message.payload, "utf-8"))
     global alarm_time
-    alarm_time=str(message.payload, "utf-8")
+    alarm_stat_new=str(message.payload, "utf-8")
+    if alarm_stat_new != alarm_time:
+        alarm_time=str(message.payload, "utf-8")
+        flag=1
+    if flag==1:
+        print("Alarm time: " + str(message.payload, "utf-8"))
+        flag=0
     
     
     #if str(message.payload, "utf-8")==current_time:  
